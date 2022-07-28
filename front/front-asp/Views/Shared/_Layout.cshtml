@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Steven Rojas</title>
+    <link rel="stylesheet" href="~/css/navbar.css" />
+</head>
+<body>
+
+    <div id="app">
+
+
+        <div class="contenedor">
+            <div>
+                <ul class="menu">
+                    <li style="background-color:#8338e6;"><a href="https://localhost:7068/Index">ASP + SPRINGBOOT</a></li>
+                    <li style="background-color: #ef6157;"><a href="http://localhost:8000/comentarios">LARAVEL</a></li>
+                    <li style="background-color: #50d1e8;"><a href="http://localhost:3001/">REACT + NODE</a></li>
+                    <li style="background-color: #e64064;"><a href="http://localhost:4200/listar">ANGULAR + NODE</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+            @RenderBody()
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

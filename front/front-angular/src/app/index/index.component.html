@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="body-index">
+      <div style="width: 60%" class="center">
+        <div class="card center">
+          <button
+            id="btncomments"
+            class="button button-block button-pink margin-top margin-top-1"
+          >
+            Nuevo <i class="fa-solid fa-angle-down"></i>
+          </button>
+
+          <div id="formulario" class="container">
+            <h4><b>Agregar nuevo comentario</b></h4>
+
+            <form [formGroup]="fcomentario" (ngSubmit)="addComments()">
+              <label for="label">Nombre</label>
+              <input
+                placeholder="Ingrese su nombre"
+                type="text"
+                required
+                name="nombre"
+                formControlName="nombre"
+                ng-model="nombre" ng-required="nombre"
+              />
+              <label for="label">Correo</label>
+              <input
+                type="email"
+                required
+                placeholder="Ingrese su correo"
+                formControlName="correo"
+                name="correo"
+                ng-model="correo" ng-required="correo"
+              />
+              <label for="label">Asunto</label>
+              <input
+                type="text"
+                required
+                placeholder="Ingrese asunto"
+                formControlName="asunto"
+                name="asunto"
+                ng-model="asunto" ng-required="asunto"
+              />
+              <label for="label">Comentario</label>
+              <input
+                type="text"
+                required
+                placeholder="Comentario"
+                formControlName="comentario"
+                name="comentario"
+                ng-model="comentario" ng-required="comentario"
+              />
+
+              <button
+                type="submit"
+                class="button button-blue margin-min"
+              >Guardar <i
+              class="fa-solid fa-floppy-disk"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <table class="styled-table center margin-top" style="width: 100%">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Asunto</th>
+              <th>Comentario</th>
+              <th>Fecha</th>
+              <th>Editar</th>
+              <th>Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of listaComentarios">
+              <td>{{ item.nombre }}</td>
+              <td>{{ item.correo }}</td>
+              <td>{{ item.asunto }}</td>
+              <td>{{ item.comentario }}</td>
+              <td>{{ item.fecha | date: "yyyy/dd/MM, h:mm":"UTC" }}</td>
+              <td>
+                <button
+                  class="link-button button button-pink"
+                  (click)="getbyid(item.id || 0)"
+                >
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+              </td>
+                <td>
+                <button
+                  class="link-button button button-red"
+                  (click)="deleteComments(item.id || 0)"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+    <!-- <script>
+      var open = false;
+
+      $('#btncomments').click(function() {
+          console.log('click');
+          alert("abre");
+          open = !open;
+
+          if (open) {
+            alert("abre");
+              $("#formulario").css("display", "block");
+              $(this).find($(".fa-solid")).removeClass('fa-angle-down').addClass('fa-angle-up');
+
+          } else {
+            alert("cierra");
+              $("#formulario").css("display", "none");
+              $(this).find($(".fa-solid")).removeClass('fa-angle-up').addClass('fa-angle-down');
+          }
+      });
+  </script> -->
+
+  </body>
+</html>

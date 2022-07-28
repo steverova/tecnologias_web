@@ -1,0 +1,29 @@
+<div class="card center">
+    <div
+      id="btncomments"
+      class="button-block button-blue margin-top margin-top-3"
+    >
+    Editar Comentario
+    </div>
+
+    <div id="formulario" class="container">
+      <h4><b>Editar Comentario</b></h4>
+
+        <form [formGroup]="fcomentario" (ngSubmit)="updateComments()">
+        <input hidden type="text" formControlName="id" />
+        <label for="label">Nombre</label>
+        <input required  placeholder="Ingrese su nombre" type="text" formControlName="nombre" />
+        <label for="label">Correo</label>
+        <input required  type="email" placeholder="Ingrese su correo" formControlName="correo" />
+        <label for="label">Asunto</label>
+        <input required  type="text" placeholder="Ingrese asunto" formControlName="asunto" />
+        <label for="label">Comentario</label>
+        <input required  type="text" placeholder="Comentario"formControlName="comentario" />
+        <button onclick="location.href='http://127.0.0.1:8000/comentarios'" class="button button-orange margin-min"> <i
+          class="fa-solid fa-angle-left"></i> Volver</button>
+        <button type="submit" class="button button-blue margin-top-1 margin-bottom-3" href="">
+          Agregar
+        </button>
+      </form>
+    </div>
+  </div>

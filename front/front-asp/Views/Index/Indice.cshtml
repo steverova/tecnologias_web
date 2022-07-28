@@ -1,0 +1,171 @@
+﻿@model front_asp.Models.CollectionModel
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>ASP - SpringBoot</title>
+    <link href="~/css/estilo.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0f02ee1723.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+
+@{
+    ViewData["Title"] = "ASP - INICIO";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="body-index">
+    <div style="width: 60%" class="center">
+        <div class="card center">
+            <button id="btncomments" class="button button-block button-pink margin-top margin-top-1">
+                Nuevo
+                <i class="fa-solid fa-angle-down"></i>
+            </button>
+
+            <div id="formulario" class="container">
+                <h4><b>Agregar nuevo comentario</b></h4>
+                <form asp-action="addComment" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="comentario.Nombre" class="control-label"></label>
+                        <input required asp-for="comentario.Nombre" class="form-control" />
+                        <span asp-validation-for="comentario.Nombre" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="comentario.Correo" class="control-label"></label>
+                        <input type="email" required asp-for="comentario.Correo" class="form-control" />
+                        <span asp-validation-for="comentario.Correo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="comentario.Asunto" class="control-label"></label>
+                        <input required asp-for="comentario.Asunto" class="form-control" />
+                        <span asp-validation-for="comentario.Asunto" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="comentario.Comentario" class="control-label"></label>
+                        <input required asp-for="comentario.Comentario" class="form-control" />
+                        <span asp-validation-for="comentario.Comentario" class="text-danger"></span>
+                    </div>
+                    <hr>
+                    <button id="btnnew" type="submit" value="Create" class="button button-blue margin-min">Guardar
+                        <i class="fa-solid fa-floppy-disk"></i></button>
+                </form>
+            </div>
+
+        </div>
+        <table class="styled-table center margin-top" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo </th>
+                    <th>Asunto </th>
+                    <th>Comentario </th>
+                    <th>Fecha </th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.listaComentarios)
+                {
+                    <tr>
+                        <td>@item.Nombre</td>
+                        <td>@item.Correo</td>
+                        <td>@item.Asunto</td>
+                        <td>@item.Comentario</td>
+                        <td>@item.Fecha </td>
+                        <td>
+                            <div>
+                                <!--<a id="editarbtn" class="link-button button button-blue"
+                                           asp-action="Editar"
+                                           asp-controller="Index"
+                                           asp-route-id="@item.Id">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>-->
+
+                            <button onclick="Editar(@item.Id)" class="link-button button button-pink">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td>
+                            <!--<a class="link-button button button-red"
+                                       asp-action="deleteComment"
+                                       asp-controller="Index"
+                                       asp-route-id="@item.Id">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>-->
+
+                        <button onclick="Eliminar(@item.Id)" class="link-button button button-red"><i
+                                class="fa-solid fa-trash"></i>
+                            </button>
+
+
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+
+    let baseUrl = `https://localhost:7068`;
+
+    function Editar(id) {
+        Swal.fire({
+            title: 'Estas seguro deseas editar el comentario?',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#e04e2f',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = baseUrl + `/Index/Editar/${id}`;
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+            }
+        });
+    }
+
+    function Eliminar(id) {
+        Swal.fire({
+            title: 'Estas seguro deseas eliminar el comentario?',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = baseUrl + `/Index/deleteComment/${id}`;
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+            }
+        });
+    }
+
+</script>
+
+
+<script>
+    var open = false;
+
+    $('#btncomments').click(function () {
+        console.log('click');
+        open = !open;
+
+        if (open) {
+            $("#formulario").css("display", "block");
+            $(this).find($(".fa-solid")).removeClass('fa-angle-down').addClass('fa-angle-up');
+
+        } else {
+            $("#formulario").css("display", "none");
+            $(this).find($(".fa-solid")).removeClass('fa-angle-up').addClass('fa-angle-down');
+        }
+    });
+</script>

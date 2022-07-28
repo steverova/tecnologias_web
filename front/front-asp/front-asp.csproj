@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>front_asp</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7" />
+    <PackageReference Include="Westwind.AspNetCore.LiveReload" Version="0.3.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Index\editComment.cshtml" />
+    <Content Remove="Views\Index\a.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\Index\Editar.cshtml.cs" />
+  </ItemGroup>
+
+</Project>
